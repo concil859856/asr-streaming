@@ -1,0 +1,4 @@
+qwen-asr[vllm]
+fastapi
+uvicorn[standard]
+python-multipart
