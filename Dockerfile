@@ -19,7 +19,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
     HF_HOME=/cache/hf \
     HF_HUB_ENABLE_HF_TRANSFER=1 \
-    TRANSFORMERS_CACHE=/cache/hf/transformers \
     HOST=0.0.0.0 \
     PORT=8114 \
     QWEN3_ASR_MODEL=/cache/hf/Qwen3-ASR-1.7B
