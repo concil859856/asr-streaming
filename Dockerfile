@@ -40,6 +40,14 @@ RUN pip install --upgrade pip \
 
 COPY main.py ./
 
+# Build-time import smoke test — verifies main.py and its module-level
+# deps (fastapi/uvicorn/torch) import cleanly. Cheap (no GPU, no vLLM
+# warmup), catches ABI mismatches and missing modules BEFORE the image
+# reaches Docker Hub. qwen_asr is imported lazily inside a function in
+# main.py, so it's deliberately NOT part of this probe (it'd need a GPU).
+RUN python3 -c "import torch; print('torch', torch.__version__)" \
+    && python3 -c "import main; print('main import OK')"
+
 # The model lives in the /cache/hf volume so it survives container
 # recreation. First boot downloads ~4.4 GB; subsequent boots are instant.
 VOLUME /cache/hf
